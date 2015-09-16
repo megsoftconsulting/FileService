@@ -124,7 +124,7 @@ namespace FileService
 				item1, item2, item3
 			};
 
-			FilesRemainingToBeUploaded = string.Format ("{0} files remaining to upload", FilesNotSynchronized.Count);
+			FilesRemainingToBeUploaded = string.Format ("{0} files remaining to be uploaded", FilesNotSynchronized.Count);
 
 			UploadAllOptionText = "Upload All";
 		}
