@@ -9,6 +9,7 @@ namespace FileService
 		public App ()
 		{
 			MainPage = new NavigationPage(new FileManagementScreen ());
+
 		}
 
 		protected override void OnStart ()

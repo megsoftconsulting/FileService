@@ -6,9 +6,20 @@ namespace FileService
 {
 	public class FileManagementScreen : ContentPage
 	{
+		public FileManagementViewModel DataContext;
+
 		public FileManagementScreen ()
 		{
+			SetContext ();
+
 			CreatePageContent ();	
+		}
+
+		void SetContext ()
+		{
+			DataContext = new FileManagementViewModel (new FileViewModelFactory(), new ServerClient());
+
+			BindingContext = DataContext;
 		}
 
 		void CreatePageContent ()
@@ -37,6 +48,7 @@ namespace FileService
 
 			var background = new StackLayout 
 			{
+				BackgroundColor = Color.FromHex("59ABE3"),
 				Orientation = StackOrientation.Horizontal,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				Padding = new Thickness (16, 12),
@@ -46,17 +58,29 @@ namespace FileService
 					remaining
 				}
 			};
-
-			background.SetBinding<FileManagementViewModel>(StackLayout.BackgroundColorProperty, m => m.HeaderTileBackground);
-
 			var listView = new ListView
 			{ 
 				BackgroundColor = Color.White,
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				VerticalOptions = LayoutOptions.FillAndExpand,
-				ItemTemplate = new DataTemplate(()=>new FileManagementViewCell()),
+				ItemTemplate = new DataTemplate(()=>{
+					
+					var viewcell = new FileManagementViewCell();
+
+					viewcell.UploadCommand = DataContext.UploadToServerCommand;
+
+					return viewcell;
+
+				}),
 				HeightRequest = 190,
 				HasUnevenRows = true
+			};
+
+			listView.ItemSelected += (sender, e) => {
+				
+				if (e.SelectedItem == null) {
+					return;
+				}
 			};
 
 			listView.SetBinding<FileManagementViewModel>(ListView.ItemsSourceProperty, m => m.FilesNotSynchronized);
@@ -75,6 +99,7 @@ namespace FileService
 
 			var buttonContainer = new StackLayout {
 				Opacity = 0.8,
+				BackgroundColor = Color.FromHex("ECF0F1"),
 				Padding = new Thickness(12),
 				HorizontalOptions = LayoutOptions.FillAndExpand,
 				VerticalOptions = LayoutOptions.End,
@@ -82,8 +107,6 @@ namespace FileService
 					button
 				}
 			};
-
-			buttonContainer.SetBinding<FileManagementViewModel> (StackLayout.BackgroundColorProperty, m => m.BottomTileBackground);
 
 			Content = new StackLayout
 			{

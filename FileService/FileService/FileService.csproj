@@ -35,8 +35,13 @@
     <Compile Include="FileManagement\FileManagementScreen.cs" />
     <Compile Include="FileManagement\FileManagementViewCell.cs" />
     <Compile Include="FileManagement\FileManagementViewModel.cs" />
-    <Compile Include="Shared\File.cs" />
-    <Compile Include="ViewModelBase\ViewModelBase.cs" />
+    <Compile Include="Views\CustomSlider.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Services\IServerClient.cs" />
+    <Compile Include="Services\ProgressArgs.cs" />
+    <Compile Include="ViewModels\FileViewModel.cs" />
+    <Compile Include="Services\FileViewModelFactory.cs" />
+    <Compile Include="Services\IFileViewModelFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.3.6323\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -58,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\" />
-    <Folder Include="ViewModelBase\" />
+    <Folder Include="Views\" />
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
