@@ -1,10 +1,13 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace FileService
 {
 	public class FileManagementViewCell : ViewCell
 	{
+		public Command<FileViewModel> UploadCommand { get; set; }
+
 		public FileManagementViewCell ()
 		{
 			var fileType = new Image
@@ -16,7 +19,7 @@ namespace FileService
 				Aspect = Aspect.AspectFit
 			};
 
-			fileType.SetBinding (Image.SourceProperty, new Binding ("FileTypeIcon"));
+			fileType.SetBinding<FileViewModel>(Image.SourceProperty, m => m.FileTypeIcon);
 
 			var fileName = new Label
 			{ 
@@ -26,7 +29,7 @@ namespace FileService
 				FontSize = 16
 			};
 
-			fileName.SetBinding (Label.TextProperty, new Binding ("FileName"));
+			fileName.SetBinding<FileViewModel>(Label.TextProperty, m => m.FileName);
 
 			var fileSize = new Label 
 			{ 
@@ -36,7 +39,7 @@ namespace FileService
 				FontSize = 10
 			};
 
-			fileSize.SetBinding (Label.TextProperty, new Binding ("FileSize"));
+			fileSize.SetBinding<FileViewModel>(Label.TextProperty, m => m.FileSize);
 
 			var lastDateModified = new Label 
 			{ 
@@ -46,13 +49,15 @@ namespace FileService
 				FontSize = 10
 			};
 
-			lastDateModified.SetBinding (Label.TextProperty, new Binding ("LastDateModified"));
+			lastDateModified.SetBinding<FileViewModel>(Label.TextProperty, m => m.LastDateModified);
 
-			var uploadProgress = new Slider
+			var uploadProgress = new ProgressBar
 			{
 				VerticalOptions = LayoutOptions.End,
 				HorizontalOptions = LayoutOptions.Fill
 			};
+
+			uploadProgress.SetBinding<FileViewModel>(ProgressBar.ProgressProperty, m => m.Progress);
 				
 			var uploadButton = new Image
 			{ 
@@ -63,7 +68,21 @@ namespace FileService
 				Aspect = Aspect.AspectFit
 			};
 
-			uploadButton.SetBinding (Image.SourceProperty, new Binding ("SynchronizeImage"));
+			uploadButton.SetBinding<FileViewModel>(Image.SourceProperty, m => m.ProgressStatusImage);
+
+			var gestureTap = new TapGestureRecognizer
+			{ 
+				Command = new Command((obj)=>{
+
+					if(UploadCommand == null)
+						throw new Exception("UploadCommand is null");
+
+					UploadCommand.Execute(BindingContext);
+
+				})
+			};
+
+			uploadButton.GestureRecognizers.Add (gestureTap);
 
 			var lastPanelStack = new StackLayout {
 				Orientation = StackOrientation.Horizontal,

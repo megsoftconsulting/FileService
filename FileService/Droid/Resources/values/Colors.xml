@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+
+	<!-- RAW COLORS -->
+	<color name="offBlack">#222222</color>
+	<color name="blue">#2d82bb</color>
+	<color name="red">#fd6252</color>
+	<color name="green">#6eba5a</color>
+	<color name="darkGrey">#7e7e7e</color>
+	<color name="lightGrey">#858585</color>
+	<color name="white">#FFFFFF</color>
+
+	<color name="test_outcome_pass">@color/green</color>
+	<color name="test_outcome_fail">@color/red</color>
+	<color name="test_outcome_unknown">#d9d8d1</color>
+
+	<!-- SEMANTIC COLORS -->
+	<color name="panel_text">@color/lightGrey</color>
+	<color name="panel_backgrond">@color/offBlack</color>
+	<color name="primary_text">@color/blue</color>
+	<color name="secondary_text">@color/darkGrey</color>   
+    <color name="icon_primary">@color/blue</color>
+	<color name="icon_secondary">@color/darkGrey</color>
+	<color name="icon_tertiary">@color/lightGrey</color>
+	<color name="body">@color/white</color>
+
+	<color name="danger">#d13931</color>
+	<color name="button_blue">#ff15b3e9</color>
+
+	<!-- Cards -->
+	<color name="card_background">@color/white</color>
+	<color name="card_heading">@color/card_text</color>
+	<color name="card_secondary">#555555</color>
+	<color name="card_text">#333333</color>
+	<color name="card_error">#b63131</color>
+
+
+	<color name="holo_blue_dark">#ff0099cc</color> 
+	<color name="holo_blue_light">#ff33b5e5</color>
+
+
+</resources>
