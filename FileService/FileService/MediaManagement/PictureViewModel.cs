@@ -13,6 +13,8 @@ namespace FileService
 
 		ILogger _loggerService;
 
+		IMediaManagementService _mediaManagementService;
+
 		public ICommand TakePictureSelected { get; set; }
 
 		public ICommand SavePicture { get; set; }
@@ -21,13 +23,24 @@ namespace FileService
 
 		public string PicturePath { get; set; }
 
+		public string WindowTitle { get; set; }
+
+		public string HeaderLabel { get; set; }
+
 		public PhotoRecordTable Picture { get; set; }
+
+		public bool Saved { get; set; } = false;
+
+
 
 		public PictureViewModel 
 			(ICameraClient cameraClient,
 			IDatabaseClient<PhotoRecordTable> databaseClient,
-			ILogger loggerService)
+			ILogger loggerService,
+			IMediaManagementService mediaManagementService)
 		{
+			_mediaManagementService = mediaManagementService;
+
 			_loggerService = loggerService;
 
 			_databaseClient = databaseClient;
@@ -37,6 +50,15 @@ namespace FileService
 			TakePictureSelected = new Command (ExecuteTakePicture);
 
 			SavePicture = new Command (ExecuteSavePicture);
+
+			Init ();
+		}
+
+		void Init ()
+		{
+			WindowTitle = "Picture";
+
+			HeaderLabel = "Let's take a picture";
 		}
 
 		public async void ExecuteTakePicture()
@@ -53,6 +75,12 @@ namespace FileService
 		public async void ExecuteSavePicture()
 		{
 			var result = await _databaseClient.InsertAsync(Picture);
+
+			//TODO: Implement NotificationService to show Feedback
+			if (result == 1) {
+
+				Saved = true;
+			}
 
 			await _loggerService.LogAsync (string.Format("Result returned {0}", result));
 		}

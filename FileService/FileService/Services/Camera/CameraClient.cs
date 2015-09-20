@@ -30,7 +30,8 @@ namespace FileService
 			var pictureTaken = new PhotoRecordTable
 			{
 				PicturePath = photo.Path,
-				PictureStream = photo.GetStream()
+				PictureStream = photo.GetStream(),
+				FileName = "Hola"
 			};
 
 			return pictureTaken;

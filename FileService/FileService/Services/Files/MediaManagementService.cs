@@ -1,36 +1,21 @@
-﻿using System;
+using System;
 using PCLStorage;
 using System.Threading.Tasks;
 
 namespace FileService
 {
-	public interface IMediaManagement
-	{
-		Task<string> ReadFile(string fileName);
 
-		Task SaveFile(string content, string fileName);
-
-		Task MoveFile(string fileName, string toPath);
-
-		Task DeleteFile(string fileName);
-	}
-
-	public class MediaManagement : IMediaManagement
+	public class MediaManagementService : IMediaManagementService
 	{
 		IFolder _rootFolder;
 
-		IFolder _folder;
-
-		public MediaManagement ()
+		public MediaManagementService ()
 		{
 			_rootFolder = FileSystem.Current.LocalStorage;
 		}
 
 		public async Task<string> ReadFile (string fileName)
-		{
-			_folder = await _rootFolder.CreateFolderAsync (fileName,
-				CreationCollisionOption.OpenIfExists);
-			
+		{ 
 			var file = await _rootFolder.GetFileAsync (fileName);
 
 			return await file.ReadAllTextAsync ();
@@ -38,7 +23,7 @@ namespace FileService
 
 		public async Task SaveFile (string content, string fileName)
 		{
-			var _file = await _folder.CreateFileAsync (fileName,
+			var _file = await _rootFolder.CreateFileAsync (fileName,
 				CreationCollisionOption.FailIfExists);
 
 			await _file.WriteAllTextAsync (content);
@@ -46,7 +31,7 @@ namespace FileService
 
 		public async Task MoveFile(string fileName, string toPath)
 		{
-			var _file = await _folder.CreateFileAsync (fileName,
+			var _file = await _rootFolder.CreateFileAsync (fileName,
 				CreationCollisionOption.OpenIfExists);
 
 			await _file.MoveAsync(toPath);
@@ -54,7 +39,7 @@ namespace FileService
 
 		public async Task DeleteFile(string fileName)
 		{
-			var _file = await _folder.CreateFileAsync (fileName,
+			var _file = await _rootFolder.CreateFileAsync (fileName,
 				CreationCollisionOption.OpenIfExists);
 
 			await _file.DeleteAsync();

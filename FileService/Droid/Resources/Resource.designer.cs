@@ -30,6 +30,8 @@ namespace FileService.Droid
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::FileService.Droid.Resource.String.Hello;
 			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.ApplicationName = global::FileService.Droid.Resource.String.ApplicationName;
 			global::SQLite.Net.Platform.XamarinAndroid.Resource.String.Hello = global::FileService.Droid.Resource.String.Hello;
+			global::PCLStorage.Resource.String.ApplicationName = global::FileService.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::FileService.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
