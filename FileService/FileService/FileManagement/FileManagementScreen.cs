@@ -12,7 +12,7 @@ namespace FileService
 		{
 			SetContext ();
 
-			CreatePageContent ();	
+			CreatePageContent ();
 		}
 
 		void SetContext ()

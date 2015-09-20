@@ -14,6 +14,7 @@ namespace FileService
 			var handler = PropertyChanged;
 			if (handler != null)
 				handler (this, e);
+			
 		}
 	}
 }

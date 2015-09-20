@@ -8,7 +8,7 @@ namespace FileService
 	{
 		public App ()
 		{
-			MainPage = new NavigationPage(new FileManagementScreen ());
+			MainPage = new NavigationPage(new PictureScreen ());
 
 		}
 
