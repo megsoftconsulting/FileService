@@ -14,7 +14,7 @@ namespace FileService
 
 		public string LastDateModified { get; set; }
 
-		public float Progress { get; set; } = 0;
+		public float Progress { get; set; }
 
 		public string ProgressStatusImage { get; set; }
 
